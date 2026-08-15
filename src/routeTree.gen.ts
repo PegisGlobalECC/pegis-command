@@ -21,6 +21,7 @@ import { Route as ExecutiveFinanceRouteImport } from './routes/executive.finance
 import { Route as ExecutiveProjectsRouteImport } from './routes/executive.projects'
 import { Route as ExecutiveRelationshipsRouteImport } from './routes/executive.relationships'
 import { Route as ExecutiveTasksRouteImport } from './routes/executive.tasks'
+import { Route as ExecutiveTravelRouteImport } from './routes/executive.travel'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -82,6 +83,11 @@ const ExecutiveTasksRoute = ExecutiveTasksRouteImport.update({
   path: '/tasks',
   getParentRoute: () => ExecutiveRoute,
 } as any)
+const ExecutiveTravelRoute = ExecutiveTravelRouteImport.update({
+  id: '/travel',
+  path: '/travel',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/executive/projects': typeof ExecutiveProjectsRoute
   '/executive/relationships': typeof ExecutiveRelationshipsRoute
   '/executive/tasks': typeof ExecutiveTasksRoute
+  '/executive/travel': typeof ExecutiveTravelRoute
   '/executive/': typeof ExecutiveIndexRoute
 }
 export interface FileRoutesByTo {
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/executive/projects': typeof ExecutiveProjectsRoute
   '/executive/relationships': typeof ExecutiveRelationshipsRoute
   '/executive/tasks': typeof ExecutiveTasksRoute
+  '/executive/travel': typeof ExecutiveTravelRoute
   '/executive': typeof ExecutiveIndexRoute
 }
 export interface FileRoutesById {
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/executive/projects': typeof ExecutiveProjectsRoute
   '/executive/relationships': typeof ExecutiveRelationshipsRoute
   '/executive/tasks': typeof ExecutiveTasksRoute
+  '/executive/travel': typeof ExecutiveTravelRoute
   '/executive/': typeof ExecutiveIndexRoute
 }
 export interface FileRouteTypes {
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/executive/projects'
     | '/executive/relationships'
     | '/executive/tasks'
+    | '/executive/travel'
     | '/executive/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/executive/projects'
     | '/executive/relationships'
     | '/executive/tasks'
+    | '/executive/travel'
     | '/executive'
   id:
     | '__root__'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/executive/projects'
     | '/executive/relationships'
     | '/executive/tasks'
+    | '/executive/travel'
     | '/executive/'
   fileRoutesById: FileRoutesById
 }
@@ -263,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveTasksRouteImport
       parentRoute: typeof ExecutiveRoute
     }
+    '/executive/travel': {
+      id: '/executive/travel'
+      path: '/travel'
+      fullPath: '/executive/travel'
+      preLoaderRoute: typeof ExecutiveTravelRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
   }
 }
 
@@ -273,6 +292,7 @@ interface ExecutiveRouteChildren {
   ExecutiveProjectsRoute: typeof ExecutiveProjectsRoute
   ExecutiveRelationshipsRoute: typeof ExecutiveRelationshipsRoute
   ExecutiveTasksRoute: typeof ExecutiveTasksRoute
+  ExecutiveTravelRoute: typeof ExecutiveTravelRoute
   ExecutiveIndexRoute: typeof ExecutiveIndexRoute
 }
 
@@ -283,6 +303,7 @@ const ExecutiveRouteChildren: ExecutiveRouteChildren = {
   ExecutiveProjectsRoute: ExecutiveProjectsRoute,
   ExecutiveRelationshipsRoute: ExecutiveRelationshipsRoute,
   ExecutiveTasksRoute: ExecutiveTasksRoute,
+  ExecutiveTravelRoute: ExecutiveTravelRoute,
   ExecutiveIndexRoute: ExecutiveIndexRoute,
 }
 
