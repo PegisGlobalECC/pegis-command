@@ -22,6 +22,7 @@ import { Route as ExecutiveProjectsRouteImport } from './routes/executive.projec
 import { Route as ExecutiveRelationshipsRouteImport } from './routes/executive.relationships'
 import { Route as ExecutiveTasksRouteImport } from './routes/executive.tasks'
 import { Route as ExecutiveTravelRouteImport } from './routes/executive.travel'
+import { Route as ManagersIndexRouteImport } from './routes/managers.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -88,13 +89,18 @@ const ExecutiveTravelRoute = ExecutiveTravelRouteImport.update({
   path: '/travel',
   getParentRoute: () => ExecutiveRoute,
 } as any)
+const ManagersIndexRoute = ManagersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ManagersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRouteWithChildren
   '/it': typeof ItRoute
-  '/managers': typeof ManagersRoute
+  '/managers': typeof ManagersRouteWithChildren
   '/executive/approvals': typeof ExecutiveApprovalsRoute
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
@@ -103,12 +109,12 @@ export interface FileRoutesByFullPath {
   '/executive/tasks': typeof ExecutiveTasksRoute
   '/executive/travel': typeof ExecutiveTravelRoute
   '/executive/': typeof ExecutiveIndexRoute
+  '/managers/': typeof ManagersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/employees': typeof EmployeesRoute
   '/it': typeof ItRoute
-  '/managers': typeof ManagersRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
@@ -117,6 +123,7 @@ export interface FileRoutesByTo {
   '/executive/tasks': typeof ExecutiveTasksRoute
   '/executive/travel': typeof ExecutiveTravelRoute
   '/executive': typeof ExecutiveIndexRoute
+  '/managers': typeof ManagersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,7 +131,7 @@ export interface FileRoutesById {
   '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRouteWithChildren
   '/it': typeof ItRoute
-  '/managers': typeof ManagersRoute
+  '/managers': typeof ManagersRouteWithChildren
   '/executive/approvals': typeof ExecutiveApprovalsRoute
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
@@ -133,6 +140,7 @@ export interface FileRoutesById {
   '/executive/tasks': typeof ExecutiveTasksRoute
   '/executive/travel': typeof ExecutiveTravelRoute
   '/executive/': typeof ExecutiveIndexRoute
+  '/managers/': typeof ManagersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,12 +158,12 @@ export interface FileRouteTypes {
     | '/executive/tasks'
     | '/executive/travel'
     | '/executive/'
+    | '/managers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/employees'
     | '/it'
-    | '/managers'
     | '/executive/approvals'
     | '/executive/decisions'
     | '/executive/finance'
@@ -164,6 +172,7 @@ export interface FileRouteTypes {
     | '/executive/tasks'
     | '/executive/travel'
     | '/executive'
+    | '/managers'
   id:
     | '__root__'
     | '/'
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/executive/tasks'
     | '/executive/travel'
     | '/executive/'
+    | '/managers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -186,7 +196,7 @@ export interface RootRouteChildren {
   EmployeesRoute: typeof EmployeesRoute
   ExecutiveRoute: typeof ExecutiveRouteWithChildren
   ItRoute: typeof ItRoute
-  ManagersRoute: typeof ManagersRoute
+  ManagersRoute: typeof ManagersRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -282,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveTravelRouteImport
       parentRoute: typeof ExecutiveRoute
     }
+    '/managers/': {
+      id: '/managers/'
+      path: '/'
+      fullPath: '/managers/'
+      preLoaderRoute: typeof ManagersIndexRouteImport
+      parentRoute: typeof ManagersRoute
+    }
   }
 }
 
@@ -311,12 +328,24 @@ const ExecutiveRouteWithChildren = ExecutiveRoute._addFileChildren(
   ExecutiveRouteChildren,
 )
 
+interface ManagersRouteChildren {
+  ManagersIndexRoute: typeof ManagersIndexRoute
+}
+
+const ManagersRouteChildren: ManagersRouteChildren = {
+  ManagersIndexRoute: ManagersIndexRoute,
+}
+
+const ManagersRouteWithChildren = ManagersRoute._addFileChildren(
+  ManagersRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EmployeesRoute: EmployeesRoute,
   ExecutiveRoute: ExecutiveRouteWithChildren,
   ItRoute: ItRoute,
-  ManagersRoute: ManagersRoute,
+  ManagersRoute: ManagersRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
