@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmployeesRouteImport } from './routes/employees'
 import { Route as ExecutiveRouteImport } from './routes/executive'
+import { Route as ItRouteImport } from './routes/it'
 import { Route as ManagersRouteImport } from './routes/managers'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const ExecutiveRoute = ExecutiveRouteImport.update({
   path: '/executive',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItRoute = ItRouteImport.update({
+  id: '/it',
+  path: '/it',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ManagersRoute = ManagersRouteImport.update({
   id: '/managers',
   path: '/managers',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRoute
+  '/it': typeof ItRoute
   '/managers': typeof ManagersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRoute
+  '/it': typeof ItRoute
   '/managers': typeof ManagersRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRoute
+  '/it': typeof ItRoute
   '/managers': typeof ManagersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/employees' | '/executive' | '/managers'
+  fullPaths: '/' | '/employees' | '/executive' | '/it' | '/managers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/employees' | '/executive' | '/managers'
-  id: '__root__' | '/' | '/employees' | '/executive' | '/managers'
+  to: '/' | '/employees' | '/executive' | '/it' | '/managers'
+  id: '__root__' | '/' | '/employees' | '/executive' | '/it' | '/managers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EmployeesRoute: typeof EmployeesRoute
   ExecutiveRoute: typeof ExecutiveRoute
+  ItRoute: typeof ItRoute
   ManagersRoute: typeof ManagersRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it': {
+      id: '/it'
+      path: '/it'
+      fullPath: '/it'
+      preLoaderRoute: typeof ItRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/managers': {
       id: '/managers'
       path: '/managers'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EmployeesRoute: EmployeesRoute,
   ExecutiveRoute: ExecutiveRoute,
+  ItRoute: ItRoute,
   ManagersRoute: ManagersRoute,
 }
 export const routeTree = rootRouteImport
