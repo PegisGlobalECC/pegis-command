@@ -10,33 +10,237 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EmployeesRouteImport } from './routes/employees'
+import { Route as ExecutiveRouteImport } from './routes/executive'
+import { Route as ItRouteImport } from './routes/it'
+import { Route as ManagersRouteImport } from './routes/managers'
+import { Route as EmployeesIndexRouteImport } from './routes/employees.index'
+import { Route as EmployeesRequestsRouteImport } from './routes/employees.requests'
+import { Route as ExecutiveIndexRouteImport } from './routes/executive.index'
+import { Route as ExecutiveApprovalsRouteImport } from './routes/executive.approvals'
+import { Route as ExecutiveDecisionsRouteImport } from './routes/executive.decisions'
+import { Route as ExecutiveFinanceRouteImport } from './routes/executive.finance'
+import { Route as ExecutiveProjectsRouteImport } from './routes/executive.projects'
+import { Route as ExecutiveRelationshipsRouteImport } from './routes/executive.relationships'
+import { Route as ExecutiveTasksRouteImport } from './routes/executive.tasks'
+import { Route as ExecutiveTravelRouteImport } from './routes/executive.travel'
+import { Route as ItIndexRouteImport } from './routes/it.index'
+import { Route as ManagersIndexRouteImport } from './routes/managers.index'
+import { Route as ManagersTasksRouteImport } from './routes/managers.tasks'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EmployeesRoute = EmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExecutiveRoute = ExecutiveRouteImport.update({
+  id: '/executive',
+  path: '/executive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItRoute = ItRouteImport.update({
+  id: '/it',
+  path: '/it',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagersRoute = ManagersRouteImport.update({
+  id: '/managers',
+  path: '/managers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmployeesIndexRoute = EmployeesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EmployeesRoute,
+} as any)
+const EmployeesRequestsRoute = EmployeesRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => EmployeesRoute,
+} as any)
+const ExecutiveIndexRoute = ExecutiveIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveApprovalsRoute = ExecutiveApprovalsRouteImport.update({
+  id: '/approvals',
+  path: '/approvals',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveDecisionsRoute = ExecutiveDecisionsRouteImport.update({
+  id: '/decisions',
+  path: '/decisions',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveFinanceRoute = ExecutiveFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveProjectsRoute = ExecutiveProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveRelationshipsRoute = ExecutiveRelationshipsRouteImport.update({
+  id: '/relationships',
+  path: '/relationships',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveTasksRoute = ExecutiveTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ExecutiveTravelRoute = ExecutiveTravelRouteImport.update({
+  id: '/travel',
+  path: '/travel',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
+const ItIndexRoute = ItIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ItRoute,
+} as any)
+const ManagersIndexRoute = ManagersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ManagersRoute,
+} as any)
+const ManagersTasksRoute = ManagersTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => ManagersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/employees': typeof EmployeesRouteWithChildren
+  '/executive': typeof ExecutiveRouteWithChildren
+  '/it': typeof ItRouteWithChildren
+  '/managers': typeof ManagersRouteWithChildren
+  '/employees/requests': typeof EmployeesRequestsRoute
+  '/executive/approvals': typeof ExecutiveApprovalsRoute
+  '/executive/decisions': typeof ExecutiveDecisionsRoute
+  '/executive/finance': typeof ExecutiveFinanceRoute
+  '/executive/projects': typeof ExecutiveProjectsRoute
+  '/executive/relationships': typeof ExecutiveRelationshipsRoute
+  '/executive/tasks': typeof ExecutiveTasksRoute
+  '/executive/travel': typeof ExecutiveTravelRoute
+  '/managers/tasks': typeof ManagersTasksRoute
+  '/employees/': typeof EmployeesIndexRoute
+  '/executive/': typeof ExecutiveIndexRoute
+  '/it/': typeof ItIndexRoute
+  '/managers/': typeof ManagersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/employees/requests': typeof EmployeesRequestsRoute
+  '/executive/approvals': typeof ExecutiveApprovalsRoute
+  '/executive/decisions': typeof ExecutiveDecisionsRoute
+  '/executive/finance': typeof ExecutiveFinanceRoute
+  '/executive/projects': typeof ExecutiveProjectsRoute
+  '/executive/relationships': typeof ExecutiveRelationshipsRoute
+  '/executive/tasks': typeof ExecutiveTasksRoute
+  '/executive/travel': typeof ExecutiveTravelRoute
+  '/managers/tasks': typeof ManagersTasksRoute
+  '/employees': typeof EmployeesIndexRoute
+  '/executive': typeof ExecutiveIndexRoute
+  '/it': typeof ItIndexRoute
+  '/managers': typeof ManagersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/employees': typeof EmployeesRouteWithChildren
+  '/executive': typeof ExecutiveRouteWithChildren
+  '/it': typeof ItRouteWithChildren
+  '/managers': typeof ManagersRouteWithChildren
+  '/employees/requests': typeof EmployeesRequestsRoute
+  '/executive/approvals': typeof ExecutiveApprovalsRoute
+  '/executive/decisions': typeof ExecutiveDecisionsRoute
+  '/executive/finance': typeof ExecutiveFinanceRoute
+  '/executive/projects': typeof ExecutiveProjectsRoute
+  '/executive/relationships': typeof ExecutiveRelationshipsRoute
+  '/executive/tasks': typeof ExecutiveTasksRoute
+  '/executive/travel': typeof ExecutiveTravelRoute
+  '/managers/tasks': typeof ManagersTasksRoute
+  '/employees/': typeof EmployeesIndexRoute
+  '/executive/': typeof ExecutiveIndexRoute
+  '/it/': typeof ItIndexRoute
+  '/managers/': typeof ManagersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/employees'
+    | '/executive'
+    | '/it'
+    | '/managers'
+    | '/employees/requests'
+    | '/executive/approvals'
+    | '/executive/decisions'
+    | '/executive/finance'
+    | '/executive/projects'
+    | '/executive/relationships'
+    | '/executive/tasks'
+    | '/executive/travel'
+    | '/managers/tasks'
+    | '/employees/'
+    | '/executive/'
+    | '/it/'
+    | '/managers/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/employees/requests'
+    | '/executive/approvals'
+    | '/executive/decisions'
+    | '/executive/finance'
+    | '/executive/projects'
+    | '/executive/relationships'
+    | '/executive/tasks'
+    | '/executive/travel'
+    | '/managers/tasks'
+    | '/employees'
+    | '/executive'
+    | '/it'
+    | '/managers'
+  id:
+    | '__root__'
+    | '/'
+    | '/employees'
+    | '/executive'
+    | '/it'
+    | '/managers'
+    | '/employees/requests'
+    | '/executive/approvals'
+    | '/executive/decisions'
+    | '/executive/finance'
+    | '/executive/projects'
+    | '/executive/relationships'
+    | '/executive/tasks'
+    | '/executive/travel'
+    | '/managers/tasks'
+    | '/employees/'
+    | '/executive/'
+    | '/it/'
+    | '/managers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EmployeesRoute: typeof EmployeesRouteWithChildren
+  ExecutiveRoute: typeof ExecutiveRouteWithChildren
+  ItRoute: typeof ItRouteWithChildren
+  ManagersRoute: typeof ManagersRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +252,198 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/employees': {
+      id: '/employees'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof EmployeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/executive': {
+      id: '/executive'
+      path: '/executive'
+      fullPath: '/executive'
+      preLoaderRoute: typeof ExecutiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it': {
+      id: '/it'
+      path: '/it'
+      fullPath: '/it'
+      preLoaderRoute: typeof ItRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/managers': {
+      id: '/managers'
+      path: '/managers'
+      fullPath: '/managers'
+      preLoaderRoute: typeof ManagersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/employees/': {
+      id: '/employees/'
+      path: '/'
+      fullPath: '/employees/'
+      preLoaderRoute: typeof EmployeesIndexRouteImport
+      parentRoute: typeof EmployeesRoute
+    }
+    '/employees/requests': {
+      id: '/employees/requests'
+      path: '/requests'
+      fullPath: '/employees/requests'
+      preLoaderRoute: typeof EmployeesRequestsRouteImport
+      parentRoute: typeof EmployeesRoute
+    }
+    '/executive/': {
+      id: '/executive/'
+      path: '/'
+      fullPath: '/executive/'
+      preLoaderRoute: typeof ExecutiveIndexRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/approvals': {
+      id: '/executive/approvals'
+      path: '/approvals'
+      fullPath: '/executive/approvals'
+      preLoaderRoute: typeof ExecutiveApprovalsRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/decisions': {
+      id: '/executive/decisions'
+      path: '/decisions'
+      fullPath: '/executive/decisions'
+      preLoaderRoute: typeof ExecutiveDecisionsRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/finance': {
+      id: '/executive/finance'
+      path: '/finance'
+      fullPath: '/executive/finance'
+      preLoaderRoute: typeof ExecutiveFinanceRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/projects': {
+      id: '/executive/projects'
+      path: '/projects'
+      fullPath: '/executive/projects'
+      preLoaderRoute: typeof ExecutiveProjectsRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/relationships': {
+      id: '/executive/relationships'
+      path: '/relationships'
+      fullPath: '/executive/relationships'
+      preLoaderRoute: typeof ExecutiveRelationshipsRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/tasks': {
+      id: '/executive/tasks'
+      path: '/tasks'
+      fullPath: '/executive/tasks'
+      preLoaderRoute: typeof ExecutiveTasksRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/executive/travel': {
+      id: '/executive/travel'
+      path: '/travel'
+      fullPath: '/executive/travel'
+      preLoaderRoute: typeof ExecutiveTravelRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
+    '/it/': {
+      id: '/it/'
+      path: '/'
+      fullPath: '/it/'
+      preLoaderRoute: typeof ItIndexRouteImport
+      parentRoute: typeof ItRoute
+    }
+    '/managers/': {
+      id: '/managers/'
+      path: '/'
+      fullPath: '/managers/'
+      preLoaderRoute: typeof ManagersIndexRouteImport
+      parentRoute: typeof ManagersRoute
+    }
+    '/managers/tasks': {
+      id: '/managers/tasks'
+      path: '/tasks'
+      fullPath: '/managers/tasks'
+      preLoaderRoute: typeof ManagersTasksRouteImport
+      parentRoute: typeof ManagersRoute
+    }
   }
 }
 
+interface EmployeesRouteChildren {
+  EmployeesRequestsRoute: typeof EmployeesRequestsRoute
+  EmployeesIndexRoute: typeof EmployeesIndexRoute
+}
+
+const EmployeesRouteChildren: EmployeesRouteChildren = {
+  EmployeesRequestsRoute: EmployeesRequestsRoute,
+  EmployeesIndexRoute: EmployeesIndexRoute,
+}
+
+const EmployeesRouteWithChildren = EmployeesRoute._addFileChildren(
+  EmployeesRouteChildren,
+)
+
+interface ExecutiveRouteChildren {
+  ExecutiveApprovalsRoute: typeof ExecutiveApprovalsRoute
+  ExecutiveDecisionsRoute: typeof ExecutiveDecisionsRoute
+  ExecutiveFinanceRoute: typeof ExecutiveFinanceRoute
+  ExecutiveProjectsRoute: typeof ExecutiveProjectsRoute
+  ExecutiveRelationshipsRoute: typeof ExecutiveRelationshipsRoute
+  ExecutiveTasksRoute: typeof ExecutiveTasksRoute
+  ExecutiveTravelRoute: typeof ExecutiveTravelRoute
+  ExecutiveIndexRoute: typeof ExecutiveIndexRoute
+}
+
+const ExecutiveRouteChildren: ExecutiveRouteChildren = {
+  ExecutiveApprovalsRoute: ExecutiveApprovalsRoute,
+  ExecutiveDecisionsRoute: ExecutiveDecisionsRoute,
+  ExecutiveFinanceRoute: ExecutiveFinanceRoute,
+  ExecutiveProjectsRoute: ExecutiveProjectsRoute,
+  ExecutiveRelationshipsRoute: ExecutiveRelationshipsRoute,
+  ExecutiveTasksRoute: ExecutiveTasksRoute,
+  ExecutiveTravelRoute: ExecutiveTravelRoute,
+  ExecutiveIndexRoute: ExecutiveIndexRoute,
+}
+
+const ExecutiveRouteWithChildren = ExecutiveRoute._addFileChildren(
+  ExecutiveRouteChildren,
+)
+
+interface ItRouteChildren {
+  ItIndexRoute: typeof ItIndexRoute
+}
+
+const ItRouteChildren: ItRouteChildren = {
+  ItIndexRoute: ItIndexRoute,
+}
+
+const ItRouteWithChildren = ItRoute._addFileChildren(ItRouteChildren)
+
+interface ManagersRouteChildren {
+  ManagersTasksRoute: typeof ManagersTasksRoute
+  ManagersIndexRoute: typeof ManagersIndexRoute
+}
+
+const ManagersRouteChildren: ManagersRouteChildren = {
+  ManagersTasksRoute: ManagersTasksRoute,
+  ManagersIndexRoute: ManagersIndexRoute,
+}
+
+const ManagersRouteWithChildren = ManagersRoute._addFileChildren(
+  ManagersRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EmployeesRoute: EmployeesRouteWithChildren,
+  ExecutiveRoute: ExecutiveRouteWithChildren,
+  ItRoute: ItRouteWithChildren,
+  ManagersRoute: ManagersRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
