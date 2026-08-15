@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EmployeesRouteImport } from './routes/employees'
 import { Route as ExecutiveRouteImport } from './routes/executive'
 import { Route as ManagersRouteImport } from './routes/managers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmployeesRoute = EmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExecutiveRoute = ExecutiveRouteImport.update({
@@ -31,30 +37,34 @@ const ManagersRoute = ManagersRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRoute
   '/managers': typeof ManagersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRoute
   '/managers': typeof ManagersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/employees': typeof EmployeesRoute
   '/executive': typeof ExecutiveRoute
   '/managers': typeof ManagersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/executive' | '/managers'
+  fullPaths: '/' | '/employees' | '/executive' | '/managers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/executive' | '/managers'
-  id: '__root__' | '/' | '/executive' | '/managers'
+  to: '/' | '/employees' | '/executive' | '/managers'
+  id: '__root__' | '/' | '/employees' | '/executive' | '/managers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EmployeesRoute: typeof EmployeesRoute
   ExecutiveRoute: typeof ExecutiveRoute
   ManagersRoute: typeof ManagersRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/employees': {
+      id: '/employees'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof EmployeesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/executive': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EmployeesRoute: EmployeesRoute,
   ExecutiveRoute: ExecutiveRoute,
   ManagersRoute: ManagersRoute,
 }
