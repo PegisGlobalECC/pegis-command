@@ -15,6 +15,7 @@ import { Route as ExecutiveRouteImport } from './routes/executive'
 import { Route as ItRouteImport } from './routes/it'
 import { Route as ManagersRouteImport } from './routes/managers'
 import { Route as EmployeesIndexRouteImport } from './routes/employees.index'
+import { Route as EmployeesRequestsRouteImport } from './routes/employees.requests'
 import { Route as ExecutiveIndexRouteImport } from './routes/executive.index'
 import { Route as ExecutiveApprovalsRouteImport } from './routes/executive.approvals'
 import { Route as ExecutiveDecisionsRouteImport } from './routes/executive.decisions'
@@ -54,6 +55,11 @@ const ManagersRoute = ManagersRouteImport.update({
 const EmployeesIndexRoute = EmployeesIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => EmployeesRoute,
+} as any)
+const EmployeesRequestsRoute = EmployeesRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
   getParentRoute: () => EmployeesRoute,
 } as any)
 const ExecutiveIndexRoute = ExecutiveIndexRouteImport.update({
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/executive': typeof ExecutiveRouteWithChildren
   '/it': typeof ItRoute
   '/managers': typeof ManagersRouteWithChildren
+  '/employees/requests': typeof EmployeesRequestsRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/it': typeof ItRoute
+  '/employees/requests': typeof EmployeesRequestsRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/executive': typeof ExecutiveRouteWithChildren
   '/it': typeof ItRoute
   '/managers': typeof ManagersRouteWithChildren
+  '/employees/requests': typeof EmployeesRequestsRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/executive'
     | '/it'
     | '/managers'
+    | '/employees/requests'
     | '/executive/approvals'
     | '/executive/decisions'
     | '/executive/finance'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/it'
+    | '/employees/requests'
     | '/executive/approvals'
     | '/executive/decisions'
     | '/executive/finance'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/executive'
     | '/it'
     | '/managers'
+    | '/employees/requests'
     | '/executive/approvals'
     | '/executive/decisions'
     | '/executive/finance'
@@ -263,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/employees/'
       preLoaderRoute: typeof EmployeesIndexRouteImport
+      parentRoute: typeof EmployeesRoute
+    }
+    '/employees/requests': {
+      id: '/employees/requests'
+      path: '/requests'
+      fullPath: '/employees/requests'
+      preLoaderRoute: typeof EmployeesRequestsRouteImport
       parentRoute: typeof EmployeesRoute
     }
     '/executive/': {
@@ -339,10 +358,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface EmployeesRouteChildren {
+  EmployeesRequestsRoute: typeof EmployeesRequestsRoute
   EmployeesIndexRoute: typeof EmployeesIndexRoute
 }
 
 const EmployeesRouteChildren: EmployeesRouteChildren = {
+  EmployeesRequestsRoute: EmployeesRequestsRoute,
   EmployeesIndexRoute: EmployeesIndexRoute,
 }
 
