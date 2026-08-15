@@ -16,6 +16,7 @@ import { Route as ItRouteImport } from './routes/it'
 import { Route as ManagersRouteImport } from './routes/managers'
 import { Route as ExecutiveIndexRouteImport } from './routes/executive.index'
 import { Route as ExecutiveApprovalsRouteImport } from './routes/executive.approvals'
+import { Route as ExecutiveDecisionsRouteImport } from './routes/executive.decisions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const ExecutiveApprovalsRoute = ExecutiveApprovalsRouteImport.update({
   path: '/approvals',
   getParentRoute: () => ExecutiveRoute,
 } as any)
+const ExecutiveDecisionsRoute = ExecutiveDecisionsRouteImport.update({
+  id: '/decisions',
+  path: '/decisions',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/it': typeof ItRoute
   '/managers': typeof ManagersRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
+  '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/': typeof ExecutiveIndexRoute
 }
 export interface FileRoutesByTo {
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/it': typeof ItRoute
   '/managers': typeof ManagersRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
+  '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive': typeof ExecutiveIndexRoute
 }
 export interface FileRoutesById {
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/it': typeof ItRoute
   '/managers': typeof ManagersRoute
   '/executive/approvals': typeof ExecutiveApprovalsRoute
+  '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/': typeof ExecutiveIndexRoute
 }
 export interface FileRouteTypes {
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/it'
     | '/managers'
     | '/executive/approvals'
+    | '/executive/decisions'
     | '/executive/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/it'
     | '/managers'
     | '/executive/approvals'
+    | '/executive/decisions'
     | '/executive'
   id:
     | '__root__'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/it'
     | '/managers'
     | '/executive/approvals'
+    | '/executive/decisions'
     | '/executive/'
   fileRoutesById: FileRoutesById
 }
@@ -168,16 +180,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveApprovalsRouteImport
       parentRoute: typeof ExecutiveRoute
     }
+    '/executive/decisions': {
+      id: '/executive/decisions'
+      path: '/decisions'
+      fullPath: '/executive/decisions'
+      preLoaderRoute: typeof ExecutiveDecisionsRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
   }
 }
 
 interface ExecutiveRouteChildren {
   ExecutiveApprovalsRoute: typeof ExecutiveApprovalsRoute
+  ExecutiveDecisionsRoute: typeof ExecutiveDecisionsRoute
   ExecutiveIndexRoute: typeof ExecutiveIndexRoute
 }
 
 const ExecutiveRouteChildren: ExecutiveRouteChildren = {
   ExecutiveApprovalsRoute: ExecutiveApprovalsRoute,
+  ExecutiveDecisionsRoute: ExecutiveDecisionsRoute,
   ExecutiveIndexRoute: ExecutiveIndexRoute,
 }
 
