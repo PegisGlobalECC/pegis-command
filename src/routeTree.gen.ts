@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExecutiveRouteImport } from './routes/executive'
+import { Route as ManagersRouteImport } from './routes/managers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const ExecutiveRoute = ExecutiveRouteImport.update({
   path: '/executive',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManagersRoute = ManagersRouteImport.update({
+  id: '/managers',
+  path: '/managers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/executive': typeof ExecutiveRoute
+  '/managers': typeof ManagersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/executive': typeof ExecutiveRoute
+  '/managers': typeof ManagersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/executive': typeof ExecutiveRoute
+  '/managers': typeof ManagersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/executive'
+  fullPaths: '/' | '/executive' | '/managers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/executive'
-  id: '__root__' | '/' | '/executive'
+  to: '/' | '/executive' | '/managers'
+  id: '__root__' | '/' | '/executive' | '/managers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExecutiveRoute: typeof ExecutiveRoute
+  ManagersRoute: typeof ManagersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/managers': {
+      id: '/managers'
+      path: '/managers'
+      fullPath: '/managers'
+      preLoaderRoute: typeof ManagersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExecutiveRoute: ExecutiveRoute,
+  ManagersRoute: ManagersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
