@@ -19,6 +19,7 @@ import { Route as ExecutiveApprovalsRouteImport } from './routes/executive.appro
 import { Route as ExecutiveDecisionsRouteImport } from './routes/executive.decisions'
 import { Route as ExecutiveFinanceRouteImport } from './routes/executive.finance'
 import { Route as ExecutiveProjectsRouteImport } from './routes/executive.projects'
+import { Route as ExecutiveRelationshipsRouteImport } from './routes/executive.relationships'
 import { Route as ExecutiveTasksRouteImport } from './routes/executive.tasks'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const ExecutiveProjectsRoute = ExecutiveProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => ExecutiveRoute,
 } as any)
+const ExecutiveRelationshipsRoute = ExecutiveRelationshipsRouteImport.update({
+  id: '/relationships',
+  path: '/relationships',
+  getParentRoute: () => ExecutiveRoute,
+} as any)
 const ExecutiveTasksRoute = ExecutiveTasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
   '/executive/projects': typeof ExecutiveProjectsRoute
+  '/executive/relationships': typeof ExecutiveRelationshipsRoute
   '/executive/tasks': typeof ExecutiveTasksRoute
   '/executive/': typeof ExecutiveIndexRoute
 }
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
   '/executive/projects': typeof ExecutiveProjectsRoute
+  '/executive/relationships': typeof ExecutiveRelationshipsRoute
   '/executive/tasks': typeof ExecutiveTasksRoute
   '/executive': typeof ExecutiveIndexRoute
 }
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/executive/decisions': typeof ExecutiveDecisionsRoute
   '/executive/finance': typeof ExecutiveFinanceRoute
   '/executive/projects': typeof ExecutiveProjectsRoute
+  '/executive/relationships': typeof ExecutiveRelationshipsRoute
   '/executive/tasks': typeof ExecutiveTasksRoute
   '/executive/': typeof ExecutiveIndexRoute
 }
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/executive/decisions'
     | '/executive/finance'
     | '/executive/projects'
+    | '/executive/relationships'
     | '/executive/tasks'
     | '/executive/'
   fileRoutesByTo: FileRoutesByTo
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/executive/decisions'
     | '/executive/finance'
     | '/executive/projects'
+    | '/executive/relationships'
     | '/executive/tasks'
     | '/executive'
   id:
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/executive/decisions'
     | '/executive/finance'
     | '/executive/projects'
+    | '/executive/relationships'
     | '/executive/tasks'
     | '/executive/'
   fileRoutesById: FileRoutesById
@@ -237,6 +249,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveProjectsRouteImport
       parentRoute: typeof ExecutiveRoute
     }
+    '/executive/relationships': {
+      id: '/executive/relationships'
+      path: '/relationships'
+      fullPath: '/executive/relationships'
+      preLoaderRoute: typeof ExecutiveRelationshipsRouteImport
+      parentRoute: typeof ExecutiveRoute
+    }
     '/executive/tasks': {
       id: '/executive/tasks'
       path: '/tasks'
@@ -252,6 +271,7 @@ interface ExecutiveRouteChildren {
   ExecutiveDecisionsRoute: typeof ExecutiveDecisionsRoute
   ExecutiveFinanceRoute: typeof ExecutiveFinanceRoute
   ExecutiveProjectsRoute: typeof ExecutiveProjectsRoute
+  ExecutiveRelationshipsRoute: typeof ExecutiveRelationshipsRoute
   ExecutiveTasksRoute: typeof ExecutiveTasksRoute
   ExecutiveIndexRoute: typeof ExecutiveIndexRoute
 }
@@ -261,6 +281,7 @@ const ExecutiveRouteChildren: ExecutiveRouteChildren = {
   ExecutiveDecisionsRoute: ExecutiveDecisionsRoute,
   ExecutiveFinanceRoute: ExecutiveFinanceRoute,
   ExecutiveProjectsRoute: ExecutiveProjectsRoute,
+  ExecutiveRelationshipsRoute: ExecutiveRelationshipsRoute,
   ExecutiveTasksRoute: ExecutiveTasksRoute,
   ExecutiveIndexRoute: ExecutiveIndexRoute,
 }
